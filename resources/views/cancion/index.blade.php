@@ -11,14 +11,14 @@
               <h4 class="card-title mt-0"> Administración de canciones</h4>
 
 
-                <div class="row">
-                    <div class="col-lg-12 margin-tb">
-                        <div class="pull-right">
-                            <a class="nav-link text-white" href="{{ route('cancion.create') }}" title="Adicionar">
-                                <i class="material-icons">add_box</i> </a>
-                        </div>
-                    </div>
+              <div class="row">
+                <div class="col-lg-12 margin-tb">
+                  <div class="pull-right">
+                    <a class="nav-link text-white" href="{{ route('cancion.create') }}" title="Adicionar">
+                      <i class="material-icons">add_box</i> </a>
+                  </div>
                 </div>
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
