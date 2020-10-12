@@ -14,7 +14,10 @@ class CancionController extends Controller
      */
     public function index()
     {
-        //
+        $cancionList = Cancion::latest()->paginate(10);
+
+        return view('cancion.index', compact('cancionList'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class CancionController extends Controller
      */
     public function create()
     {
-        //
+        return view('cancion.create');
     }
 
     /**
@@ -35,7 +38,15 @@ class CancionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'idAlbum' => 'required',
+            'nombre' => 'required'
+        ]);
+
+        Cancion::create($request->all());
+
+        return redirect()->route('cancion.index')
+            ->with('success', 'Cancion creada satisfactoriamente.');
     }
 
     /**
@@ -46,7 +57,7 @@ class CancionController extends Controller
      */
     public function show(Cancion $cancion)
     {
-        //
+        return view('cancion.show', compact('cancion'));
     }
 
     /**
@@ -57,7 +68,7 @@ class CancionController extends Controller
      */
     public function edit(Cancion $cancion)
     {
-        //
+        return view('cancion.edit', compact('cancion'));
     }
 
     /**
@@ -69,7 +80,14 @@ class CancionController extends Controller
      */
     public function update(Request $request, Cancion $cancion)
     {
-        //
+        $request->validate([
+            'idAlbum' => 'required',
+            'nombre' => 'required'
+        ]);
+        $cancion->update($request->all());
+
+        return redirect()->route('cancion.index')
+            ->with('success', 'Cancion actualizada satisfactoria');
     }
 
     /**
@@ -80,6 +98,9 @@ class CancionController extends Controller
      */
     public function destroy(Cancion $cancion)
     {
-        //
+        $cancion->delete();
+
+        return redirect()->route('cancion.index')
+            ->with('success', 'Cancion eliminada satisfactoriamente');
     }
 }
