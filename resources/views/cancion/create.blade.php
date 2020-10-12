@@ -1,6 +1,7 @@
 @extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('User Profile')])
 
 @section('content')
+
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -30,30 +31,19 @@
                   </ul>
                 </div>
               @endif
-
-              <form action="{{ route('cancion.update', $cancion->id) }}" method="POST">
+              <form action="{{ route('cancion.store') }}" method="POST" >
                 @csrf
-                @method('PUT')
-
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                      <strong>Name:</strong>
-                      <input type="text" name="name" value="{{ $cancion->nombre}}" class="form-control" placeholder="Nombre">
+                      <strong>Nombre:</strong>
+                      <input type="text" name="nombre" class="form-control" placeholder="Nombre">
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                      <strong>Location:</strong>
-                      <input type="text" name="location" class="form-control" placeholder="{{ $cancion->nroReproducciones }}"
-                             value="{{ $cancion->nroReproducciones }}">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                      <strong>Cost:</strong>
-                      <input type="number" name="cost" class="form-control" placeholder="{{ $cancion->idAlbum }}"
-                             value="{{ $cancion->idAlbum }}">
+                      <strong>Album:</strong>
+                      <input type="number" name="idAlbum" class="form-control" placeholder="Album">
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
