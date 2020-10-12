@@ -24,25 +24,17 @@
   @endif
   <form action="{{ route('cancion.store') }}" method="POST" >
     @csrf
-
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
           <strong>Nombre:</strong>
-          <input type="text" name="name" class="form-control" placeholder="Nombre">
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-          <strong>Introduction:</strong>
-          <textarea class="form-control" style="height:50px" name="introduction"
-                    placeholder="Introduction"></textarea>
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre">
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
           <strong>Album:</strong>
-          <input type="number" name="cost" class="form-control" placeholder="Album">
+          <input type="number" name="idAlbum" class="form-control" placeholder="Album">
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 text-center">
