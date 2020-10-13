@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Canciones')])
+@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Album')])
 
 @section('content')
 
@@ -8,13 +8,13 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de Artista</h4>
+              <h4 class="card-title mt-0"> Administración de Album</h4>
 
 
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('artista.create') }}" title="Adicionar">
+                    <a class="nav-link text-white" href="{{ route('album.create') }}" title="Adicionar">
                       <i class="material-icons">add_box</i> </a>
                   </div>
                 </div>
@@ -26,23 +26,27 @@
                   <thead class="text-primary">
                   <th>Id</th>
                   <th>Nombre</th>
+                  <th>Año de Lanzamiento</th>
+                  <th>Artista</th>
                   <th>Fecha Creación</th>
                   <th width="280px">Acciones</th>
                   </thead>
                   <tbody>
-                  @foreach ($artistaList as $artista)
+                  @foreach ($albumList as $album)
                     <tr>
                       <td>{{ ++$i }}</td>
-                      <td>{{ $artista->nombre }}</td>
-                      <td>{{ date_format($artista->created_at, 'jS M Y') }}</td>
+                      <td>{{ $album->nombre }}</td>
+                      <td>{{ $album->gestionLanzamiento }}</td>
+                      <td>{{ $album->idArtista }}</td>
+                      <td></td>
                       <td>
-                        <form action="{{ route('artista.destroy',  $artista->id) }}" method="POST">
+                        <form action="{{ route('album.destroy',  $album->id) }}" method="POST">
 
-                          <!--<a href="{{ route('artista.show', $artista->id) }}" title="show">
+                          <!--<a href="{{ route('album.show', $album->id) }}" title="show">
                             <i class="material-icons">visibility</i> </a>
                           </a>-->
 
-                          <a href="{{ route('artista.edit', $artista) }}">
+                          <a href="{{ route('album.edit', $album) }}">
                             <i class="material-icons">create</i> </a>
                           @csrf
                           @method('DELETE')
@@ -67,14 +71,14 @@
     <br><br><br><br><br><br>
     <div class="col-lg-12 margin-tb">
       <div class="pull-left">
-        <!--<h2>artistaes</h2>-->
+        <!--<h2>albumes</h2>-->
       </div>
       <div class="pull-right">
         <br>
         <br>
         <br>
         <br>
-        <a class="btn btn-success" href="{{ route('artista.create') }}" title="Create a project"> <i class="fas fa-plus-circle"></i>
+        <a class="btn btn-success" href="{{ route('album.create') }}" title="Create a project"> <i class="fas fa-plus-circle"></i>
         </a>
       </div>
     </div>
@@ -88,5 +92,5 @@
 
 
 
-  {!! $artistaList->links() !!}
+  {!! $albumList->links() !!}
 @endsection

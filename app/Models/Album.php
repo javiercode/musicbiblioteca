@@ -9,4 +9,7 @@ class Album extends Model
 {
     protected $table = 'album';
     use HasFactory;
+
+    protected $fillable = ['nombre','idArtista','gestionLanzamiento'];
+    public $timestamps = true;
 }

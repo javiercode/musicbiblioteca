@@ -63,8 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
-Route::resource('cancion', 'App\Http\Controllers\CancionController', ['except' => ['show']]);
-Route::resource('album', 'App\Http\Controllers\AlbumController', ['except' => ['show']]);
+Route::resource('cancion', 'App\Http\Controllers\CancionController');
+Route::resource('album', 'App\Http\Controllers\AlbumController');
 Route::resource('artista', 'App\Http\Controllers\ArtistaController');
 Route::group(['middleware' => 'CRUD'], function () {
 });

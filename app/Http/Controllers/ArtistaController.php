@@ -50,22 +50,24 @@ class ArtistaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Artista  $artista
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Artista $artista)
+    public function show($id)
     {
+        $artista = Artista::find($id);
         return view('artista.show', compact('artista'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Artista  $artista
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Artista $artista)
+    public function edit($id)
     {
+        $artista=Artista::find($id);
         return view('artista.edit', compact('artista'));
     }
 
@@ -73,14 +75,15 @@ class ArtistaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Artista  $artista
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Artista $artista)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nombre' => 'required'
         ]);
+        $artista=Artista::find($id);
         $artista->update($request->all());
 
         return redirect()->route('artista.index')
@@ -90,21 +93,14 @@ class ArtistaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Artista  $artista
+
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Artista $artista)
+    public function destroy($id)
     {
-        print_r($artista);
-//        $mail=Artista::find(2);
-//        $mail->delete($mail->id);
-//        print_r($artista->toArray());
-//        echo $artista->id();
-//        $artista->delete();
-
-//        $user = Artista::find($artista->id);
-//        $user->delete();
-//        return redirect()->route('artista.index')
-//            ->with('success', 'Artista eliminada satisfactoriamente');
+        Artista::destroy($id);
+        return redirect()->route('artista.index')
+            ->with('success', 'Artista eliminada satisfactoriamente');
     }
 }
