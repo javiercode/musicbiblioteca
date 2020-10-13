@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('User Profile')])
+@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Album')])
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de artistas</h4>
+              <h4 class="card-title mt-0"> Crear Album</h4>
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">

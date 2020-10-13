@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('User Profile')])
+@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Cancion')])
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de canciones</h4>
+              <h4 class="card-title mt-0"> Crear de canciones</h4>
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
@@ -41,11 +41,9 @@
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                       <strong>Album:</strong>
-                      <input type="number" name="idAlbum" class="form-control" placeholder="Album">
                       <select name="idAlbum" class="form-control">
-                        @foreach ($aAlbum as $album)
-                          <option value="{{ $album->id}}">{{ $album->nombre}}</option>
-                        @endforeach
+                        @foreach ($albumList as $album)
+                              <option value="{{$album['id']}}">{{$album['nombre']}}</option>                        @endforeach
                       </select>
                     </div>
                   </div>

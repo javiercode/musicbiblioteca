@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('User Profile')])
+@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Cancion')])
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de canciones</h4>
+              <h4 class="card-title mt-0"> Editar de canciones</h4>
 
 
               <div class="row">
@@ -45,16 +45,12 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                      <strong>Location:</strong>
-                      <input type="text" name="location" class="form-control" placeholder="{{ $cancion->nroReproducciones }}"
-                             value="{{ $cancion->nroReproducciones }}">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                      <strong>Cost:</strong>
-                      <input type="number" name="cost" class="form-control" placeholder="{{ $cancion->idAlbum }}"
-                             value="{{ $cancion->idAlbum }}">
+                      <strong>Album:</strong>
+                      <select name="idArtista" id="" class="form-control">
+                        @foreach ($albumList as $album)
+                          <option value="{{$album['id']}}" {{$album['id']==$cancion->idAlbum ? 'SELECTED': ''}}>{{$album['nombre']}}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -69,18 +65,4 @@
       </div>
     </div>
   </div>
-
-
-  {{--<div class="row">--}}
-    {{--<div class="col-lg-12 margin-tb">--}}
-      {{--<div class="pull-left">--}}
-        {{--<h2>Edit Product</h2>--}}
-      {{--</div>--}}
-      {{--<div class="pull-right">--}}
-        {{--<a class="btn btn-primary" href="{{ route('cancion.index') }}" title="Go back"> <i class="fas fa-backward "></i> </a>--}}
-      {{--</div>--}}
-    {{--</div>--}}
-  {{--</div>--}}
-
-
 @endsection

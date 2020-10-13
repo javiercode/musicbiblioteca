@@ -17,8 +17,17 @@ class CancionController extends Controller
     {
         $cancionList = Cancion::latest()->paginate(10);
 
-        return view('cancion.index', compact('cancionList'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $albumList = Album::orderBy('nombre', 'asc')->get()
+            ->map(function ($record) {
+                return array($record->id => $record->nombre);
+            })->all();
+        $albumList= array_reduce($albumList,function ($carray, $oValue){
+            $carray[key($oValue)]=$oValue[key($oValue)];
+            return $carray;
+        });
+
+        return view('cancion.index', ['aAlbum'=>$albumList, 'cancionList'=>$cancionList])
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -29,15 +38,9 @@ class CancionController extends Controller
     public function create()
     {
         $albumList = Album::orderBy('nombre', 'desc')
-//            ->take(10)
             ->get()->toArray();
 
-        $func = function($valor) {
-            return(array($valor->id => $valor->nombre));
-        };
-        $aAlbum = array_map($func, $albumList);
-
-        return view('cancion.create', compact('aAlbum'));
+        return view('cancion.create', compact('albumList'));
     }
 
     /**
@@ -52,8 +55,12 @@ class CancionController extends Controller
             'idAlbum' => 'required',
             'nombre' => 'required'
         ]);
+        $aData = $request->all();
+        if(!isset($aData['nroReproducciones'])){
+            $aData['nroReproducciones'] = 0;
+        }
 
-        Cancion::create($request->all());
+        Cancion::create($aData);
 
         return redirect()->route('cancion.index')
             ->with('success', 'Cancion creada satisfactoriamente.');
@@ -62,38 +69,44 @@ class CancionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cancion  $cancion
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cancion $cancion)
+    public function show($id)
     {
+        $cancion = Cancion::find($id);
         return view('cancion.show', compact('cancion'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cancion  $cancion
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cancion $cancion)
+    public function edit($id)
     {
-        return view('cancion.edit', compact('cancion'));
+        $albumList = Album::orderBy('nombre', 'desc')
+            ->get()->toArray();
+        $cancion=Cancion::find($id);
+//        return view('cancion.edit', compact('cancion'));
+        return view('cancion.edit', ['cancion'=>$cancion, 'albumList'=>$albumList]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cancion  $cancion
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cancion $cancion)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'idAlbum' => 'required',
             'nombre' => 'required'
         ]);
+        $cancion = Cancion::find($id);
         $cancion->update($request->all());
 
         return redirect()->route('cancion.index')
@@ -103,12 +116,12 @@ class CancionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cancion  $cancion
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cancion $cancion)
+    public function destroy($id)
     {
-        $cancion->delete();
+        Cancion::destroy($id);
 
         return redirect()->route('cancion.index')
             ->with('success', 'Cancion eliminada satisfactoriamente');

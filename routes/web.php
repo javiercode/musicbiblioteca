@@ -24,7 +24,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {
@@ -56,16 +56,20 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('upgrade');
 });
 
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+
+    Route::resource('cancion', 'App\Http\Controllers\CancionController', ['except' => ['show']]);
+    Route::resource('album', 'App\Http\Controllers\AlbumController', ['except' => ['show']]);
+    Route::resource('artista', 'App\Http\Controllers\ArtistaController', ['except' => ['show']]);
 });
 
-Route::resource('cancion', 'App\Http\Controllers\CancionController');
-Route::resource('album', 'App\Http\Controllers\AlbumController');
-Route::resource('artista', 'App\Http\Controllers\ArtistaController');
+Route::put('reproducir', ['as' => 'cancion.reproducir', 'uses' => 'App\Http\Controllers\HomeController@reproducir']);
+
 Route::group(['middleware' => 'CRUD'], function () {
 });
 

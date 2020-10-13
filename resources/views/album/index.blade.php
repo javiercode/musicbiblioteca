@@ -1,15 +1,13 @@
 @extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Album')])
 
 @section('content')
-
   <div class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de Album</h4>
-
+              <h4 class="card-title mt-0"> Listado</h4>
 
               <div class="row">
                 <div class="col-lg-12 margin-tb">
@@ -24,7 +22,7 @@
               <div class="table-responsive">
                 <table class="table table-hover">
                   <thead class="text-primary">
-                  <th>Id</th>
+                  <th>Nro</th>
                   <th>Nombre</th>
                   <th>Año de Lanzamiento</th>
                   <th>Artista</th>
@@ -37,15 +35,10 @@
                       <td>{{ ++$i }}</td>
                       <td>{{ $album->nombre }}</td>
                       <td>{{ $album->gestionLanzamiento }}</td>
-                      <td>{{ $album->idArtista }}</td>
-                      <td></td>
+                      <td>{{ $aArtista[$album->idArtista] }}</td>
+                      <td>{{ date_format($album->created_at, 'jS M Y') }}</td>
                       <td>
                         <form action="{{ route('album.destroy',  $album->id) }}" method="POST">
-
-                          <!--<a href="{{ route('album.show', $album->id) }}" title="show">
-                            <i class="material-icons">visibility</i> </a>
-                          </a>-->
-
                           <a href="{{ route('album.edit', $album) }}">
                             <i class="material-icons">create</i> </a>
                           @csrf

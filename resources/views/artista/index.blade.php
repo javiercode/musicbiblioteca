@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Canciones')])
+@extends('layouts.app', ['activePage' => 'cancion', 'titlePage' => __('Administración de Artista')])
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de Artista</h4>
+              <h4 class="card-title mt-0"> Listado</h4>
 
 
               <div class="row">
@@ -24,7 +24,7 @@
               <div class="table-responsive">
                 <table class="table table-hover">
                   <thead class="text-primary">
-                  <th>Id</th>
+                  <th>Nro</th>
                   <th>Nombre</th>
                   <th>Fecha Creación</th>
                   <th width="280px">Acciones</th>
@@ -38,9 +38,9 @@
                       <td>
                         <form action="{{ route('artista.destroy',  $artista->id) }}" method="POST">
 
-                          <!--<a href="{{ route('artista.show', $artista->id) }}" title="show">
-                            <i class="material-icons">visibility</i> </a>
-                          </a>-->
+                          {{--<a href="{{ route('artista.show', $artista->id) }}" title="show">--}}
+                            {{--<i class="material-icons">visibility</i> </a>--}}
+                          {{--</a>--}}
 
                           <a href="{{ route('artista.edit', $artista) }}">
                             <i class="material-icons">create</i> </a>

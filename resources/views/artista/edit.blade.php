@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('User Profile')])
+@extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('Artista')])
 
 @section('content')
   <div class="content">
@@ -31,9 +31,6 @@
 
                 <div class="row">
                   <div class="col-lg-12 margin-tb">
-                    <div class="pull-left">
-                      <h2>Edit Product</h2>
-                    </div>
                     <div class="pull-right">
                       <a class="btn btn-primary" href="{{ route('artista.index') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
                     </div>

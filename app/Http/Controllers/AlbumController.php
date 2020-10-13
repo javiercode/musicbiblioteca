@@ -17,15 +17,17 @@ class AlbumController extends Controller
     public function index()
     {
         $albumList = Album::latest()->paginate(10);
+        $artistaList = Artista::orderBy('id', 'desc')->get()
+            ->map(function ($record) {
+            return array($record->id => $record->nombre);
+        })->all();
+        $artistaList= array_reduce($artistaList,function ($carray, $oValue){
+            $carray[key($oValue)]=$oValue[key($oValue)];
+            return $carray;
+        });
 
-        print_r($albumList);
 
-        $albumList = DB::table('album')
-            ->join('artista', 'album.idArtista', '=', 'artista.id')
-            ->select('album.*', 'artista.nombre as artista')
-            ->latest()->paginate(10);
-        print_r($albumList);
-        return view('album.index', ['albumList'=>$albumList])
+        return view('album.index', ['albumList'=>$albumList, 'aArtista'=>$artistaList])
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -69,7 +71,7 @@ class AlbumController extends Controller
      */
     public function show($id)
     {
-        $album = Artista::find($id);
+        $album = Album::find($id);
         return view('album.show', compact('album'));
     }
 
@@ -82,7 +84,9 @@ class AlbumController extends Controller
     public function edit($id)
     {
         $album=Album::find($id);
-        return view('album.edit', compact('album'));
+        $artistaList = Artista::orderBy('nombre', 'desc')
+            ->get()->toArray();
+        return view('album.edit', ['album'=>$album, 'artistaList'=>$artistaList]);
     }
 
     /**
