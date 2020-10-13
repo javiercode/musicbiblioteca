@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cancion;
+use App\Models\Album;
 use Illuminate\Http\Request;
 
 class CancionController extends Controller
@@ -27,7 +28,16 @@ class CancionController extends Controller
      */
     public function create()
     {
-        return view('cancion.create');
+        $albumList = Album::orderBy('nombre', 'desc')
+//            ->take(10)
+            ->get()->toArray();
+
+        $func = function($valor) {
+            return(array($valor->id => $valor->nombre));
+        };
+        $aAlbum = array_map($func, $albumList);
+
+        return view('cancion.create', compact('aAlbum'));
     }
 
     /**

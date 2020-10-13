@@ -1,7 +1,6 @@
 @extends('layouts.app', ['activePage' => 'profile', 'titlePage' => __('User Profile')])
 
 @section('content')
-
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -29,24 +28,30 @@
                   </ul>
                 </div>
               @endif
-              <form action="{{ route('cancion.store') }}" method="POST" >
+
+              <form action="{{ route('cancion.update', $cancion->id) }}" method="POST">
                 @csrf
+                @method('PUT')
+
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                      <strong>Nombre:</strong>
-                      <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                      <strong>Name:</strong>
+                      <input type="text" name="name" value="{{ $cancion->nombre}}" class="form-control" placeholder="Nombre">
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                      <strong>Album:</strong>
-                      <input type="number" name="idAlbum" class="form-control" placeholder="Album">
-                      <select name="idAlbum" class="form-control">
-                        @foreach ($aAlbum as $album)
-                          <option value="{{ $album->id}}">{{ $album->nombre}}</option>
-                        @endforeach
-                      </select>
+                      <strong>Location:</strong>
+                      <input type="text" name="location" class="form-control" placeholder="{{ $cancion->nroReproducciones }}"
+                             value="{{ $cancion->nroReproducciones }}">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                      <strong>Cost:</strong>
+                      <input type="number" name="cost" class="form-control" placeholder="{{ $cancion->idAlbum }}"
+                             value="{{ $cancion->idAlbum }}">
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -61,5 +66,18 @@
       </div>
     </div>
   </div>
+
+
+  {{--<div class="row">--}}
+    {{--<div class="col-lg-12 margin-tb">--}}
+      {{--<div class="pull-left">--}}
+        {{--<h2>Edit Product</h2>--}}
+      {{--</div>--}}
+      {{--<div class="pull-right">--}}
+        {{--<a class="btn btn-primary" href="{{ route('cancion.index') }}" title="Go back"> <i class="fas fa-backward "></i> </a>--}}
+      {{--</div>--}}
+    {{--</div>--}}
+  {{--</div>--}}
+
 
 @endsection

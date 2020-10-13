@@ -57,13 +57,13 @@
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'album' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('user.index') }}">
+              <a class="nav-link" href="{{ route('album.index') }}">
                 <span class="sidebar-mini"> UM </span>
                 <span class="sidebar-normal"> {{ __('Album') }} </span>
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'artista' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('user.index') }}">
+              <a class="nav-link" href="{{ route('artista.index') }}">
                 <span class="sidebar-mini"> UM </span>
                 <span class="sidebar-normal"> {{ __('Artista') }} </span>
               </a>

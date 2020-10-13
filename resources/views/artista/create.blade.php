@@ -8,11 +8,11 @@
         <div class="col-md-12">
           <div class="card card-plain">
             <div class="card-header card-header-primary">
-              <h4 class="card-title mt-0"> Administración de canciones</h4>
+              <h4 class="card-title mt-0"> Administración de artistas</h4>
               <div class="row">
                 <div class="col-lg-12 margin-tb">
                   <div class="pull-right">
-                    <a class="nav-link text-white" href="{{ route('cancion.create') }}" title="Adicionar">
+                    <a class="nav-link text-white" href="{{ route('artista.create') }}" title="Adicionar">
                       <i class="material-icons">add_box</i> </a>
                   </div>
                 </div>
@@ -29,24 +29,13 @@
                   </ul>
                 </div>
               @endif
-              <form action="{{ route('cancion.store') }}" method="POST" >
+              <form action="{{ route('artista.store') }}" method="POST" >
                 @csrf
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                       <strong>Nombre:</strong>
                       <input type="text" name="nombre" class="form-control" placeholder="Nombre">
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                      <strong>Album:</strong>
-                      <input type="number" name="idAlbum" class="form-control" placeholder="Album">
-                      <select name="idAlbum" class="form-control">
-                        @foreach ($aAlbum as $album)
-                          <option value="{{ $album->id}}">{{ $album->nombre}}</option>
-                        @endforeach
-                      </select>
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">

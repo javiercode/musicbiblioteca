@@ -64,8 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resource('cancion', 'App\Http\Controllers\CancionController', ['except' => ['show']]);
+Route::resource('album', 'App\Http\Controllers\AlbumController', ['except' => ['show']]);
+Route::resource('artista', 'App\Http\Controllers\ArtistaController');
 Route::group(['middleware' => 'CRUD'], function () {
-    Route::resource('album', 'App\Http\Controllers\AlbumController', ['except' => ['show']]);
-    Route::resource('artista', 'App\Http\Controllers\ArtistaController', ['except' => ['show']]);
 });
 
