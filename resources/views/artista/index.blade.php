@@ -37,18 +37,14 @@
                       <td>{{ date_format($artista->created_at, 'jS M Y') }}</td>
                       <td>
                         <form action="{{ route('artista.destroy',  $artista->id) }}" method="POST">
-
-                          {{--<a href="{{ route('artista.show', $artista->id) }}" title="show">--}}
-                            {{--<i class="material-icons">visibility</i> </a>--}}
-                          {{--</a>--}}
-
                           <a href="{{ route('artista.edit', $artista) }}">
-                            <i class="material-icons">create</i> </a>
+                            <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')
-                          <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="material-icons">delete</i>
-                          </button>
+                        <button type="submit" rel="tooltip" title="Eliminar"
+                                class="btn btn-danger btn-link btn-sm">
+                            <i class="material-icons">close</i>
+                        </button>
                         </form>
                       </td>
                     </tr>

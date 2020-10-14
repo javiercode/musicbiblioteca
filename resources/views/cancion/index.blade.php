@@ -27,7 +27,8 @@
                   <th>Nro</th>
                   <th>Nombre</th>
                   <th>Reproduccines</th>
-                  <th width="280px">Reproducir</th>
+                  <th width="280px">Reproducciones</th>
+                  <th>Fecha Creación</th>
                   </thead>
                   <tbody>
                   @foreach ($cancionList as $cancion)
@@ -36,14 +37,15 @@
                       <td>{{ $cancion->nombre }}</td>
                       <td>{{ $aAlbum[$cancion->idAlbum]}}</td>
                       <td>{{ $cancion->nroReproducciones}}</td>
+                      <td>{{ date_format($cancion->created_at, 'jS M Y') }}</td>
                       <td>
                         <form action="{{ route('cancion.destroy', $cancion->id) }}" method="POST">
                           <a href="{{ route('cancion.edit', $cancion) }}">
-                            <i class="material-icons">create</i> </a>
+                            <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')
-                          <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="material-icons">delete</i>
+                          <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-link btn-sm">
+                            <i class="material-icons">close</i>
                           </button>
                         </form>
                       </td>

@@ -40,11 +40,12 @@
                       <td>
                         <form action="{{ route('album.destroy',  $album->id) }}" method="POST">
                           <a href="{{ route('album.edit', $album) }}">
-                            <i class="material-icons">create</i> </a>
+                            <i class="material-icons">edit</i> </a>
                           @csrf
                           @method('DELETE')
-                          <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="material-icons">delete</i>
+                          <button type="submit" rel="tooltip" title="Eliminar"
+                                  class="btn btn-danger btn-link btn-sm">
+                            <i class="material-icons">close</i>
                           </button>
                         </form>
                       </td>
