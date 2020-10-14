@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('artista', 'App\Http\Controllers\ArtistaController', ['except' => ['show']]);
 });
 
-Route::put('reproducir', ['as' => 'cancion.reproducir', 'uses' => 'App\Http\Controllers\HomeController@reproducir']);
+Route::put('reproducir', ['as' => 'reproducir', 'uses' => 'App\Http\Controllers\HomeController@reproducir']);
 
 Route::group(['middleware' => 'CRUD'], function () {
 });

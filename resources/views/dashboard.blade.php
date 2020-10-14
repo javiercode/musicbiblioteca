@@ -3,6 +3,13 @@
 @section('content')
   <div class="content">
     <div class="container-fluid">
+        <div class="row">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
+        </div>
       <div class="row">
         <div class="col-lg-6 col-md-12">
           <div class="card">
@@ -261,23 +268,20 @@
                 <thead class="text-primary">
                 <th>Nro</th>
                 <th>Nombre</th>
-                <th>Album</th>
                 <th>Reproduccines</th>
-                <th>Fecha Creación</th>
-                <th width="280px">Acciones</th>
+                <th width="280px">Reproducir</th>
                 </thead>
                 <tbody>
                 @foreach ($cancionList as $cancion)
                   <tr>
                     <td>{{ ++$i }}</td>
                     <td>{{ $cancion->nombre }} <br>
-                      <small><strong>Album: {{ $aAlbum[$cancion->idAlbum]}}</strong></small>
+                      <small><strong>Album: </strong>{{ $aAlbum[$cancion->idAlbum]}}</small>
                     </td>
                     <td>{{ $cancion->nroReproducciones}}</td>
-                    <td>{{ date_format($cancion->created_at, 'jS M Y') }}</td>
                     <td>
-                      <form action="{{ route('cancion.reproducir', $cancion->id) }}" method="POST">
-                        {{--@csrf--}}
+                      <form action="{{ route('reproducir') }}" method="POST">
+                        @csrf
                         @method('put')
                           <input name="id" value="{{$cancion->id}}" type="hidden">
                         <button type="submit" title="Reproducir" style="border: none; background-color:transparent;">

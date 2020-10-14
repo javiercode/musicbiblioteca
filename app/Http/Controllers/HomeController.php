@@ -51,21 +51,22 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
-     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function reproducir(Request $request, $id)
-//    public function reproducir($id)
-    {
-//        $aData = $request->all();
+//    public function reproducir(Request $request, $id)
+    public function reproducir(Request $request){
+        $aData = $request->all();
+        $id = $aData['id'];
 
         $cancion = Cancion::find($id);
         $aData['id'] = $id;
         $aData['nroReproducciones'] = $cancion->nroReproducciones+1;
-        Cancion::update($aData);
+        $cancion->update($aData);
+
+        //print_r($cancion);
 
         return redirect()->route('home')
-            ->with('success', 'Reproduciendo'+ $cancion->nombre);
+            ->with('success', 'Reproduciendo: '. $cancion->nombre);
     }
 
     /**
